@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, HttpException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { PrismaService } from "src/prisma/prisma.service";
@@ -32,7 +32,7 @@ export class AuthService {
 
     return {
       Token: token
-    }
+    };
   }
 
   async login(email: string, password: string) {
@@ -47,7 +47,9 @@ export class AuthService {
     }
 
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) throw new UnauthorizedException(`Email or password not valid.`);
+    if (!valid) {
+      throw new UnauthorizedException(`Email or password not valid.`);
+    }
 
     return this.createToken(user);
   }
@@ -62,9 +64,7 @@ export class AuthService {
       return data;
     } catch (error) {
       console.log(error);
-      throw new BadRequestException(error);
+      throw new BadRequestException("Invalid token.");
     }
   }
-
- 
 }
