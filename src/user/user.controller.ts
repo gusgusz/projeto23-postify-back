@@ -12,8 +12,5 @@ constructor(private readonly userService: UserService) {}
         return this.userService.createUser(body);
     }
 
-    @Post('login')
-    login(@Body() body: loginDto) {
-        return this.userService.login(body);
-    }
+   
 }
