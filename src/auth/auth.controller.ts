@@ -5,13 +5,13 @@ import { AuthService } from "./auth.service";
 import { CreateUserDTO } from "../user/dto/createUser.dto";
 import { UserService } from "../user/user.service";
 
-@Controller('auth')
+@Controller('signin')
 export class AuthController {
 
 
     constructor(private readonly authService: AuthService) { }
 
-    @Post("login")
+    @Post()
     async login(@Body() body: loginDto) {
       const { email, password } = body;
       return this.authService.login(email, password);
