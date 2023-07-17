@@ -52,5 +52,19 @@ export class AuthService {
     return this.createToken(user);
   }
 
+  checkToken(token: string) {
+    try {
+      const data = this.jwtService.verify(token, {
+        issuer: this.ISSUER,
+        audience: this.AUDIENCE,
+      });
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error);
+    }
+  }
+
  
 }
