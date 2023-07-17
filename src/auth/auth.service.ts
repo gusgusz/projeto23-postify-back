@@ -14,9 +14,9 @@ export class AuthService {
   private AUDIENCE = "users";
 
   constructor(
-    private jwtService: JwtService,
-    private prisma: PrismaService,
-    private usersService: UserService
+    private readonly jwtService: JwtService,
+    private  readonly prisma: PrismaService,
+    private readonly usersService: UserService
   ) { }
 
   async createToken(user: User) {
