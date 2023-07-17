@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
     try {
       const data = this.authService.checkToken((authorization ?? "").split(" ")[1]);
-      const user = await this.userService.findUserById(parseInt(data.sub));
+      const user = await this.userService.findUserById(parseInt(data.id));
       request.user = user;
     } catch (error) {
       console.log(error);
